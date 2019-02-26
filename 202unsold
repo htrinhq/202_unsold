@@ -7,16 +7,16 @@ def proba(values: [int], x: int, y: int) -> float:
     return (((values[0] - x) * (values[1] - y)) /
     ((5 * values[0] - 150) * (5 * values[1] - 150)))
 
-def fill_results(results: [[float]], values: [int]) -> [[float]]:
-    """Fill double tab results with proba() function."""
+def fill_joint_law(joint_law: [[float]], values: [int]) -> [[float]]:
+    """Fill double tab joint_law with proba() function."""
     for i in range(0, 5):
         x_tab = []
         for x in range(0, 5):
             x_tab.insert(x, proba(values, (x + 1) * 10, (i + 1) * 10))
-        results.insert(i, x_tab)
-    return results
+        joint_law.insert(i, x_tab)
+    return joint_law
 
-def print_tab(results: [[float]]):
+def print_tab(joint_law: [[float]]):
     """Displays the first tab on Terminal."""
     divider()
     print('\tX=10\tX=20\tX=30\tX=40\tX=50\tY law')
@@ -24,17 +24,17 @@ def print_tab(results: [[float]]):
         for i in range(0, 5):
             if i == 0:
                 print('Y=' + str((y + 1) * 10), end='\t')
-            print('%.03f' % results[y][i], end='' if i == 4 else '\t')
+            print('%.03f' % joint_law[y][i], end='' if i == 4 else '\t')
         print()
     print('X law')
     divider()
 
 def unsold(values: [int]) -> int:
-    results = [[]]
+    joint_law = [[]]
     if values[0] <= 50 or values[1] <= 50:
         error()
-    results = fill_results(results, values)
-    print_tab(results)
+    joint_law = fill_joint_law(joint_law, values)
+    print_tab(joint_law)
     return 0
 
 def divider():
@@ -50,8 +50,8 @@ def error():
 def helper():
     """Helper function for 202unsold."""
     print('USAGE\n\t./202unsold a b\n')
-    print('DESCRIPTION\n\ta\tconstant computed from the past results')
-    print('\tb\tconstant computed from the past results')
+    print('DESCRIPTION\n\ta\tconstant computed from the past joint_law')
+    print('\tb\tconstant computed from the past joint_law')
 
 if __name__ == "__main__":
     if len(argv) == 2 and argv[1] == '-h':
