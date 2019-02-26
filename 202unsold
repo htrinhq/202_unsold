@@ -2,6 +2,45 @@
 
 from sys import argv, stderr
 
+def proba(values: [int], x: int, y: int) -> float:
+    """Get the Probability with subject formula."""
+    return (((values[0] - x) * (values[1] - y)) /
+    ((5 * values[0] - 150) * (5 * values[1] - 150)))
+
+def fill_results(results: [[float]], values: [int]) -> [[float]]:
+    """Fill double tab results with proba() function."""
+    for i in range(0, 5):
+        x_tab = []
+        for x in range(0, 5):
+            x_tab.insert(x, proba(values, (x + 1) * 10, (i + 1) * 10))
+        results.insert(i, x_tab)
+    return results
+
+def print_tab(results: [[float]]):
+    """Displays the first tab on Terminal."""
+    divider()
+    print('\tX=10\tX=20\tX=30\tX=40\tX=50\tY law')
+    for y in range(0, 5):
+        for i in range(0, 5):
+            if i == 0:
+                print('Y=' + str((y + 1) * 10), end='\t')
+            print('%.03f' % results[y][i], end='' if i == 4 else '\t')
+        print()
+    print('X law')
+    divider()
+
+def unsold(values: [int]) -> int:
+    results = [[]]
+    if values[0] <= 50 or values[1] <= 50:
+        error()
+    results = fill_results(results, values)
+    print_tab(results)
+    return 0
+
+def divider():
+    """Divide Sections with '-'"""
+    print('-' * 54)
+
 def error():
     """Error message and exit 84"""
     stderr.write('\033[31mINVALID ARGUMENT\n\033[0m')
@@ -19,8 +58,7 @@ if __name__ == "__main__":
         helper()
         exit(0)
     elif len(argv) == 3 and argv[1].isnumeric() and argv[2].isnumeric():
-        print('202unsold')
-        exit(0)
+        values = [int(argv[1]), int(argv[2])]
+        exit(unsold(values))
     else:
         error()
-    pass
