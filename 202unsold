@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+
+from sys import argv, stderr
+
+def error():
+    """Error message and exit 84"""
+    stderr.write('\033[31mINVALID ARGUMENT\n\033[0m')
+    stderr.write('Type \'-h\' for more informations\n')
+    exit(84)
+
+def helper():
+    """Helper function for 202unsold."""
+    print('USAGE\n\t./202unsold a b\n')
+    print('DESCRIPTION\n\ta\tconstant computed from the past results')
+    print('\tb\tconstant computed from the past results')
+
+if __name__ == "__main__":
+    if len(argv) == 2 and argv[1] == '-h':
+        helper()
+        exit(0)
+    elif len(argv) == 3 and argv[1].isnumeric() and argv[2].isnumeric():
+        print('202unsold')
+        exit(0)
+    else:
+        error()
+    pass
