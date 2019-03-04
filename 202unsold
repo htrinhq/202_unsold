@@ -18,23 +18,27 @@ def fill_joint_law(joint_law: [[float]], values: [int]) -> [[float]]:
 
 def print_tab(joint_law: [[float]]):
     """Displays the first tab on Terminal."""
-    divider()
     print('\tX=10\tX=20\tX=30\tX=40\tX=50\tY law')
     for y in range(0, 5):
         for i in range(0, 5):
             if i == 0:
                 print('Y=' + str((y + 1) * 10), end='\t')
-            print('%.03f' % joint_law[y][i], end='' if i == 4 else '\t')
-        print()
-    print('X law')
-    divider()
+            print('%.03f' % joint_law[y][i], end='\t')
+        print('%.03f' % sum(joint_law[y]))
+    print('X law', end='\t')
+    for i in range(0, 5):
+        print('%.03f' % (joint_law[4][i] * 10), end='\t')
+    print('{:g}' .format(sum(joint_law[4]) * 10))
 
 def unsold(values: [int]) -> int:
+    """Unsold main function."""
     joint_law = [[]]
     if values[0] <= 50 or values[1] <= 50:
         error()
     joint_law = fill_joint_law(joint_law, values)
+    divider()
     print_tab(joint_law)
+    divider()
     return 0
 
 def divider():
