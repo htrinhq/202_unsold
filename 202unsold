@@ -1,61 +1,12 @@
 #!/usr/bin/env python3
+##
+## EPITECH PROJECT, 2019
+## 202unsold_2018
+## File description:
+## 202unsold
+##
 
-from sys import argv, stderr
-
-def proba(values: [int], x: int, y: int) -> float:
-    """Get the Probability with subject formula."""
-    return (((values[0] - x) * (values[1] - y)) /
-    ((5 * values[0] - 150) * (5 * values[1] - 150)))
-
-def fill_joint_law(joint_law: [[float]], values: [int]) -> [[float]]:
-    """Fill double tab joint_law with proba() function."""
-    for i in range(0, 5):
-        x_tab = []
-        for x in range(0, 5):
-            x_tab.insert(x, proba(values, (x + 1) * 10, (i + 1) * 10))
-        joint_law.insert(i, x_tab)
-    return joint_law
-
-def print_tab(joint_law: [[float]]):
-    """Displays the first tab on Terminal."""
-    print('\tX=10\tX=20\tX=30\tX=40\tX=50\tY law')
-    for y in range(0, 5):
-        for i in range(0, 5):
-            if i == 0:
-                print('Y=' + str((y + 1) * 10), end='\t')
-            print('%.03f' % joint_law[y][i], end='\t')
-        print('%.03f' % sum(joint_law[y]))
-    print('X law', end='\t')
-    for i in range(0, 5):
-        print('%.03f' % (joint_law[4][i] * 10), end='\t')
-    print('{:g}' .format(sum(joint_law[4]) * 10))
-
-def unsold(values: [int]) -> int:
-    """Unsold main function."""
-    joint_law = [[]]
-    if values[0] <= 50 or values[1] <= 50:
-        error()
-    joint_law = fill_joint_law(joint_law, values)
-    divider()
-    print_tab(joint_law)
-    divider()
-    return 0
-
-def divider():
-    """Divide Sections with '-'"""
-    print('-' * 54)
-
-def error():
-    """Error message and exit 84"""
-    stderr.write('\033[31mINVALID ARGUMENT\n\033[0m')
-    stderr.write('Type \'-h\' for more informations\n')
-    exit(84)
-
-def helper():
-    """Helper function for 202unsold."""
-    print('USAGE\n\t./202unsold a b\n')
-    print('DESCRIPTION\n\ta\tconstant computed from the past joint_law')
-    print('\tb\tconstant computed from the past joint_law')
+from unsold import *
 
 if __name__ == "__main__":
     if len(argv) == 2 and argv[1] == '-h':
@@ -63,6 +14,9 @@ if __name__ == "__main__":
         exit(0)
     elif len(argv) == 3 and argv[1].isnumeric() and argv[2].isnumeric():
         values = [int(argv[1]), int(argv[2])]
-        exit(unsold(values))
+        if values[0] <= 50 or values[1] <= 50:
+            error()
+        else:
+            exit(unsold(values))
     else:
         error()
