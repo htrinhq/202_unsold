@@ -25,5 +25,5 @@ def print_expected_values(xTab: [float], yTab: [float], zTab: [float]):
     print('variance of X:\t\t{:.01f}' .format(varX))
     print('expected value of Y:\t{:.01f}' .format(expY))
     print('variance of Y:\t\t{:.01f}' .format(varY))
-    print('expected value of X:\t{:.01f}' .format(expZ))
-    print('variance of X:\t\t{:.01f}' .format(varZ))
+    print('expected value of Z:\t{:.01f}' .format(expZ))
+    print('variance of Z:\t\t{:.01f}' .format(varZ))
